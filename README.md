@@ -133,15 +133,15 @@ Transposing when mutiple values and variable names are in the data. Keywords: sa
     ');
 
 
-   Improvement to double transpose keeps numeric type
+    Improvement to double transpose keeps numeric type
 
-   proc transpose data=have(keep=group val:) out=havxpo
+    proc transpose data=have(keep=group val:) out=havxpo
       (keep=group _name_ col1 where=(upcase(_name_ )=: "VALUE"));
      by _all_;
      var val:;
-   run;quit;
+    run;quit;
 
-   proc transpose data=havXpo out=wantXpoXpo(drop=_name_) prefix=var;
+    proc transpose data=havXpo out=wantXpoXpo(drop=_name_) prefix=var;
      by group;
      var col1;
-   run;quit;
+    run;quit;
