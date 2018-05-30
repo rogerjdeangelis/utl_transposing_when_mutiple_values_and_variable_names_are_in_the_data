@@ -2,6 +2,8 @@
 Transposing when mutiple values and variable names are in the data. Keywords: sas sql join merge big data analytics macros oracle teradata mysql sas communities stackoverflow statistics artificial inteligence AI Python R Java Javascript WPS Matlab SPSS Scala Perl C C# Excel MS Access JSON graphics maps NLP natural language processing machine learning igraph DOSUBL DOW loop stackoverflow SAS community.
 
     Transposing when mutiple values and variable names are in the data
+    
+    see improvement to double transpose on end
 
     github
     https://tinyurl.com/yaqxs6fe
@@ -130,3 +132,16 @@ Transposing when mutiple values and variable names are in the data. Keywords: sa
     run;quit;
     ');
 
+
+   Improvement to double transpose keeps numeric type
+
+   proc transpose data=have(keep=group val:) out=havxpo
+      (keep=group _name_ col1 where=(upcase(_name_ )=: "VALUE"));
+     by _all_;
+     var val:;
+   run;quit;
+
+   proc transpose data=havXpo out=wantXpoXpo(drop=_name_) prefix=var;
+     by group;
+     var col1;
+   run;quit;
