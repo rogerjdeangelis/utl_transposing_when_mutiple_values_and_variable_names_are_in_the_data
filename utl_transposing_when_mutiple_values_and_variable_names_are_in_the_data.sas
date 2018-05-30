@@ -1,5 +1,7 @@
 Transposing when mutiple values and variable names are in the data
 
+see enhanced double transpose on end
+
 github
 https://tinyurl.com/yaqxs6fe
 https://github.com/rogerjdeangelis/utl_transposing_when_mutiple_values_and_variable_names_are_in_the_data
@@ -127,3 +129,16 @@ proc print;
 run;quit;
 ');
 
+
+Improvement to double transpose keeps numeric type
+
+   proc transpose data=have(keep=group val:) out=havxpo
+      (keep=group _name_ col1 where=(upcase(_name_ )=: "VALUE"));
+     by _all_;
+     var val:;
+   run;quit;
+
+   proc transpose data=havXpo out=wantXpoXpo(drop=_name_) prefix=var;
+     by group;
+     var col1;
+   run;quit;
